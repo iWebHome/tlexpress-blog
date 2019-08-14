@@ -4,10 +4,12 @@ const path = require('path')
 const app = express()
 const bodyParser = require('body-parser')
 const log4js = require('log4js')
+const { logConfig, settings } = require('./config')
 
 // 引入路由
 const routes = require('./app/routes')
 
+log4js.configure( logConfig )
 let logger = log4js.getLogger()
 logger.level = 'debug'
 global.logger = logger
@@ -24,7 +26,5 @@ app.use(bodyParser.json())
 // 注册路由
 routes(app)
 
-app.listen(3000)
-
-logger.info(`start:port is 3000`)
-// console.log('express-blog server started on: ' + 3000)
+app.listen(settings.port)
+logger.info(`start:port is ${settings.port}`)
