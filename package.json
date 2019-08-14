@@ -1,0 +1,14 @@
+{
+    "name": "tlexpress-blog",
+    "version": "1.0.0",
+    "description": "Node+Express搭建个人博客（纯后端）",
+    "main": "app.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "lichuanjun",
+    "license": "ISC",
+    "devDependencies": {
+        "express": "^4.17.1"
+    }
+}
