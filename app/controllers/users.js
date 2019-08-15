@@ -1,10 +1,9 @@
 'use strict'
 const Services = require('../services')
 class UsersController {
-  async create(req, res) {
-    const paramas = req.body
-    const result = await Services.users.addUser(paramas)
-    res.send(result)
+  async test (req, res) {
+    const result = await Services.users.test(req.body.name)
+    res.sendOk(result)
   }
 }
 

@@ -5,14 +5,14 @@ const assert = require('assert')
 const app = require('../../server')
 
 describe('test tlexpress-frame http request', () => {
-  let server = app.listen(9000)
+  const server = app.listen(9000)
   describe('test user module', () => {
-    let createUser = {
+    const createUser = {
       name: 'test001',
       password: '123456'
     }
     it('test /users (post) create ', async () => {
-      let response = await request(server)
+      const response = await request(server)
         .post('/users')
         .send(createUser)
         .set('Accept', 'application/json')

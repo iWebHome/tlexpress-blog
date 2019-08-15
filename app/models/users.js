@@ -6,13 +6,13 @@ const UserSchema = new Schema({
   name: { type: String, required: 'name is required' },
   nickName: { type: String },
   password: { type: String },
-  age: {type: Number, min: 18, max: 95},
+  age: { type: Number, min: 18, max: 95 },
   sex: { type: String, enum: ['male', 'female', 'unknow'] },
   company: String, // 大学或者公司
   website: String, // 个人网站
   intruction: { type: String, default: '这个人很懒，什么都有没留下~~~' },
   logo: { type: String, default: '/upload/images/defaultlogo.png' },
-  role: {type: String, default: 'ordinary users'},
+  role: { type: String, default: 'ordinary users' },
   lastLogin: Date,
   createdAt: {
     type: Date,
@@ -44,7 +44,7 @@ UserSchema.path('updatedAt').get(function (v) {
 
 UserSchema.statics = {
   findAge: async function (age) {
-    const findRes = await this.find({age: age})
+    const findRes = await this.find({ age: age })
     return findRes
   }
 }

@@ -5,7 +5,7 @@ const myutil = require('../app/myutil')
 
 module.exports = async (name, password, saltKey, role) => {
   try {
-    const findRes = await mdbs.User.findOne({name: name})
+    const findRes = await mdbs.User.findOne({ name: name })
     if (findRes) {
       console.log('admin用户已经存在，请勿重复添加')
       return 'admin用户已经存在，请勿重复添加'

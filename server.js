@@ -5,14 +5,15 @@ const app = express()
 const bodyParser = require('body-parser')
 const log4js = require('log4js')
 const mongoose = require('mongoose')
+const cors = require('cors')
 
 const { logConfig, settings } = require('./config')
 
 // 引入路由
 const routes = require('./app/routes')
 
-log4js.configure( logConfig )
-let logger = log4js.getLogger()
+log4js.configure(logConfig)
+const logger = log4js.getLogger()
 logger.level = 'debug'
 global.logger = logger
 
@@ -31,6 +32,9 @@ mongoose.Promise = global.Promise
 // MongoDB升级到4.0之后，需要加useNewUrlParser参数和useCreateIndex参数
 mongoose.connect(settings.dbConfig.URL, { useNewUrlParser: true, useCreateIndex: true })
 mongoose.set('debug', settings.mongooseDebug)
+
+// 跨域配置
+app.use(cors())
 
 // 注册路由
 routes(app)

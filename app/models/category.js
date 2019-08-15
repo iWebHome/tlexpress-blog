@@ -4,8 +4,8 @@ const moment = require('moment')
 const Schema = mongoose.Schema
 const ObjectId = Schema.ObjectId
 const CategorySchema = new Schema({
-  userId: {type: ObjectId, ref: 'Users'},
-  name: {type: String, required: 'name is required'},
+  userId: { type: ObjectId, ref: 'Users' },
+  name: { type: String, required: 'name is required' },
   createdAt: {
     type: Date,
     default: Date.now

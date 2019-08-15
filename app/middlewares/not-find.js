@@ -1,6 +1,9 @@
 'use strict'
 
 // 404错误处理中间件
+const { resHandler } = require('../myutil')
+
 module.exports = (req, res, next) => {
-  res.send('404,您访问的路由不存在！')
+  const errorRes = resHandler.getErrorRes('NOT_FIND_ROUTE')
+  res.sendErr(errorRes)
 }

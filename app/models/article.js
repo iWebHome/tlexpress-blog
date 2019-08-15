@@ -11,10 +11,10 @@ const ArticleSchema = new Schema({
   createAt: { type: Date, default: Date.now, index: true },
   updateAt: { type: Date, default: Date.now },
   countInfo: {
-    commentCount: {type: Number, default: 0},
-    visitCount: {type: Number, default: 0},
-    collectCount: {type: Number, default: 0},
-    likeCount: {type: Number, default: 0}
+    commentCount: { type: Number, default: 0 },
+    visitCount: { type: Number, default: 0 },
+    collectCount: { type: Number, default: 0 },
+    likeCount: { type: Number, default: 0 }
   },
   contentType: { type: String, enum: ['html', 'markdown'] },
   categoryId: { type: ObjectId, ref: 'Categorys' },
