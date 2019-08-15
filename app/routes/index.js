@@ -7,6 +7,7 @@ const middlewaresArr = [middleware.verifyToken, middleware.log]
 module.exports = function (app) {
   app.use(middleware.resExtend)
   app.post('/users/test', Controllers.users.test)
+  app.post('/user/login', Controllers.users.login)
   app.use(middlewaresArr)
   app.route('/test')
     .post(Controllers.test.testResponse)
