@@ -10,6 +10,21 @@ class UserService extends BaseService {
     this.model = 'User'
   }
 
+  async addUser(data) {
+    try {
+      const findRes = await mdb.User.findOne({ name: data.name })
+      if (findRes) {
+        const errorMsg = 'USER_HAS_EXITS'
+        throw errorMsg
+      }
+      data.password = crypto.encrypted(data.password, settings.saltKey)
+      const result = await mdb.User.create(data)
+      return format.user(result.toObject())
+    } catch (error) {
+      throw error
+    }
+  }
+
   async login(params) {
     try {
       const findRes = await mdb.User.findOne({ name: params.name }, null, { lean: true })
