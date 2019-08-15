@@ -10,7 +10,7 @@ module.exports = function (app) {
   app.post('/user/login', Controllers.users.login)
   app.post('/user', Controllers.users.create)
   app.use(middlewaresArr)
-  // require('./user')(app)
+  require('./user')(app)
   app.route('/test')
     .post(Controllers.test.testResponse)
 }

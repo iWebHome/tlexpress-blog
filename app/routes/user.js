@@ -9,4 +9,8 @@ module.exports = (app) => {
     .get(Controllers.users.detail)
     .put(Controllers.users.update)
     .delete(Controllers.users.destroy)
+  app.route('/userbyname')
+    .post(Controllers.users.userByName)
+  app.route('/userbyid/:_id')
+    .post(Controllers.users.userById)
 }

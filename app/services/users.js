@@ -25,6 +25,73 @@ class UserService extends BaseService {
     }
   }
 
+  async getUserByName(name) {
+    try {
+      const user = await mdb.User.findOne({ name: name }, null, { lean: true })
+      return user
+    } catch (error) {
+      const errorMsg = 'SERVER_ERROR'
+      throw errorMsg
+    }
+  }
+
+  async getUserById(idParams) {
+    try {
+      const user = await mdb.User.findById(idParams)
+      return user
+    } catch (error) {
+      const errorMsg = 'SERVER_ERROR'
+      throw errorMsg
+    }
+  }
+
+  async destroy(params) {
+    try {
+      const findRes = await mdb.User.findById(params)
+      if (!findRes) {
+        const errorMsg = 'USER_NOT_EXITS'
+        throw errorMsg
+      }
+      await mdb.User.remove({ _id: params })
+      const result = resHandler.getSuccessMsg('USER_DELETE_SUCCESS')
+      return result
+    } catch (error) {
+      throw error
+    }
+  }
+
+  async update(params) {
+    try {
+      await mdb.User.findById(params._id)
+      await mdb.User.update({ _id: params._id }, { $set: params })
+      const result = resHandler.getSuccessMsg('USER_UPDATE_SUCCESS')
+      return result
+    } catch (error) {
+      const errorMsg = 'USER_UPDATE_FAILED'
+      throw errorMsg
+    }
+  }
+
+  async getUserList(params) {
+    try {
+      const result = super.list(params)
+      return result
+    } catch (error) {
+      throw error
+    }
+  }
+
+  async detail(params) {
+    try {
+      const findRes = await mdb.User.findById(params)
+      const result = format.user(findRes.toObject())
+      return result
+    } catch (error) {
+      const errorMsg = 'USER_NOT_EXITS'
+      throw errorMsg
+    }
+  }
+  
   async login(params) {
     try {
       const findRes = await mdb.User.findOne({ name: params.name }, null, { lean: true })
