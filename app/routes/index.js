@@ -11,6 +11,7 @@ module.exports = function (app) {
   app.post('/user', Controllers.users.create)
   app.use(middlewaresArr)
   require('./user')(app)
+  require('./category')(app)
   app.route('/test')
     .post(Controllers.test.testResponse)
 }
