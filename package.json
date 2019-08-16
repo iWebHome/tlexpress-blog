@@ -9,13 +9,19 @@
         "build": "node ./build/server.js",
         "test": "mocha test/**/*.js",
         "standard": "standard",
-        "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0"
+        "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
+        "apidoc": "apidoc -i app/apidoc/ -o app/public/apidoc/"
     },
     "author": "lichuanjun",
     "license": "ISC",
     "pre-commit": [
         "standard"
     ],
+    "apidoc": {
+        "name": "tlexpress-blog接口文档",
+        "title": "tlexpress-blog接口文档",
+        "version": "0.1.0"
+    },
     "devDependencies": {
         "bluebird": "^3.5.5",
         "config": "^3.2.2",

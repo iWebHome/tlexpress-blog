@@ -54,3 +54,22 @@ tlexpress-blog
 - logs/**用于存放程序的请求日志、错误日志等日志文件。
 - resource/**用于存放文档资料。
 - test/**用于单元测试。
+
+命令说明：
+``` shell
+# 安装依赖
+npm install
+# 开发模式启动程序
+npm run dev
+# 生产模式启动程序
+npm run start
+# 生成接口文档
+npm run apidoc
+# 生成提交日志
+npm run changelog
+# 运行测试代码
+npm run test
+# 初始化构建，生成admin账号
+npm run build
+```
+注：执行`npm run apidoc`后启动程序，开发环境下访问`localhost:4000/apidoc`即可查看接口文档。
