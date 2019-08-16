@@ -1,12 +1,12 @@
 'use strict'
-const uuidv1 = require('uuid/v1')
+// const uuidv1 = require('uuid/v1')
 // const path = require('path')
 const Services = require('../services')
-const { auth, resHandler, paramsHandler, validator, upload } = require('../myutil')
-const { pageConfig, settings } = require('../../config')
+const { auth, resHandler, paramsHandler, validator } = require('../myutil')//, upload
+const { pageConfig } = require('../../config')//, settings
 
 class ArticleController {
-  async create(req, res) {
+  async create (req, res) {
     try {
       if (validator.isEmpty(req.body.title, { ignore_whitespace: true })) {
         const errorMsg = 'TITLE_IS_EMPTY'
@@ -26,7 +26,7 @@ class ArticleController {
     }
   }
 
-  async update(req, res) {
+  async update (req, res) {
     try {
       const result = await Services.article.editById(req.params._id, req.body)
       res.sendOk(result)
@@ -80,7 +80,7 @@ class ArticleController {
   //   }
   // }
 
-  async detail(req, res) {
+  async detail (req, res) {
     try {
       const result = await Services.article.getArticleById(req.params._id)
       res.sendOk(result)
@@ -90,7 +90,7 @@ class ArticleController {
     }
   }
 
-  async list(req, res) {
+  async list (req, res) {
     try {
       // 翻页参数处理
       const offset = paramsHandler.offsetFormat(req.query, pageConfig.article)

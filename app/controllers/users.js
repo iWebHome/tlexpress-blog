@@ -1,11 +1,10 @@
 'use strict'
 const Services = require('../services')
-const {auth, format, resHandler, paramsHandler} = require('../myutil')
+const { auth, format, resHandler, paramsHandler } = require('../myutil')
 const { pageConfig } = require('../../config')
 
 class UsersController {
-
-  async create(req, res) {
+  async create (req, res) {
     try {
       const result = await Services.users.addUser(req.body)
       res.sendOk(result)
@@ -15,7 +14,7 @@ class UsersController {
     }
   }
 
-  async destroy(req, res) {
+  async destroy (req, res) {
     try {
       const result = await Services.users.destroy(req.params._id)
       res.sendOk(result)
@@ -25,7 +24,7 @@ class UsersController {
     }
   }
 
-  async update(req, res) {
+  async update (req, res) {
     try {
       const params = req.body
       params._id = req.params._id
@@ -37,7 +36,7 @@ class UsersController {
     }
   }
 
-  async list(req, res) {
+  async list (req, res) {
     try {
       // 翻页参数处理
       const offset = paramsHandler.offsetFormat(req.query, pageConfig.users)
@@ -59,7 +58,7 @@ class UsersController {
     }
   }
 
-  async detail(req, res) {
+  async detail (req, res) {
     try {
       const result = await Services.users.detail(req.params._id)
       res.sendOk(result)
@@ -69,7 +68,7 @@ class UsersController {
     }
   }
 
-  async login(req, res) {
+  async login (req, res) {
     try {
       const result = await Services.users.login(req.body)
       result.token = auth.createToken(result._id)
@@ -80,7 +79,7 @@ class UsersController {
     }
   }
 
-  async userByName(req, res) {
+  async userByName (req, res) {
     try {
       const result = await Services.users.getUserByName(req.body.name)
       res.sendOk(result)
@@ -90,7 +89,7 @@ class UsersController {
     }
   }
 
-  async userById(req, res) {
+  async userById (req, res) {
     try {
       const result = await Services.users.getUserById(req.params._id)
       res.sendOk(result)

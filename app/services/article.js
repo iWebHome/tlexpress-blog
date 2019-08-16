@@ -4,15 +4,15 @@ const fs = require('fs')
 const BaseService = require('./base')
 const mdb = require('../models')
 const { resHandler } = require('../myutil')
-const { settings } = require('../../config')
+// const { settings } = require('../../config')
 
 class ArticleService extends BaseService {
-  constructor(model) {
+  constructor (model) {
     super(model)
     this.model = 'Article'
   }
 
-  async addArticle(params) {
+  async addArticle (params) {
     try {
       const query = {
         title: params.title,
@@ -26,11 +26,12 @@ class ArticleService extends BaseService {
       const result = await super.save(params)
       return result
     } catch (error) {
-      throw error
+      const errorMsg = 'ARTICLE_ADD_FAILED'
+      throw errorMsg
     }
   }
 
-  async editById(id, params) {
+  async editById (id, params) {
     try {
       const findRes = await super.findById(id)
       if (!findRes) {
@@ -41,20 +42,22 @@ class ArticleService extends BaseService {
       const result = resHandler.getSuccessMsg('ARTICLE_UPDATE_SUCCESS')
       return result
     } catch (error) {
-      throw error
+      const errorMsg = 'ARTICLE_UPDATE_FAILED'
+      throw errorMsg
     }
   }
 
-  async getArticleList(params) {
+  async getArticleList (params) {
     try {
       const result = await super.list(params)
       return result
     } catch (error) {
-      throw error
+      const errorMsg = 'ARTICLELIST_FIND_FAILDE'
+      throw errorMsg
     }
   }
 
-  async getArticleById(id) {
+  async getArticleById (id) {
     try {
       const result = await mdb.Article.findById(id)
         .populate([{ path: 'authorId', select: '-password' }, { path: 'categoryId' }])
@@ -64,7 +67,8 @@ class ArticleService extends BaseService {
       }
       return result
     } catch (error) {
-      throw error
+      const errorMsg = 'ARTICLE_QUERY_FAILED'
+      throw errorMsg
     }
   }
 
@@ -90,14 +94,15 @@ class ArticleService extends BaseService {
   //   }
   // }
 
-  async saveFile(filePath, target, fileName) {
+  async saveFile (filePath, target, fileName) {
     try {
       const readStream = fs.createReadStream(filePath)
       const writeStream = fs.createWriteStream(target)
       readStream.pipe(writeStream)
       return fileName
     } catch (error) {
-      throw error
+      const modelErrorMsg = resHandler.getErrorRes(error)
+      throw modelErrorMsg
     }
   }
 }

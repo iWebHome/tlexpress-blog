@@ -9,15 +9,22 @@ describe('test tlexpress-frame http request', () => {
   describe('test user module', () => {
     const createUser = {
       name: 'test001',
-      password: '123456'
+      password: '123456',
+      age: 30,
+      nickName: 'test',
+      sex: 'male',
+      company: 'TEST公司',
+      website: 'test.com',
+      instruction: 'test~！',
+      role: 'ordinary users'
     }
-    it('test /users (post) create ', async () => {
+    it('test /user (post) create ', async () => {
       const response = await request(server)
-        .post('/users')
+        .post('/user')
         .send(createUser)
         .set('Accept', 'application/json')
         .expect(200)
-      assert.deepEqual(0, response.body.errorCode)
+      assert.deepStrictEqual(0, response.body.errorCode)
     })
   })
 })

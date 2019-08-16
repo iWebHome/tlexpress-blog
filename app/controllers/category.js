@@ -4,7 +4,7 @@ const { auth, resHandler, paramsHandler, validator } = require('../myutil')
 const { pageConfig } = require('../../config')
 
 class CategoryController {
-  async create(req, res) {
+  async create (req, res) {
     try {
       if (validator.isEmpty(req.body.name, { ignore_whitespace: true })) {
         const errorMsg = 'CATEGORYNAME_IS_EMPTY'
@@ -20,7 +20,7 @@ class CategoryController {
     }
   }
 
-  async update(req, res) {
+  async update (req, res) {
     try {
       const result = await Services.category.editById(req.params._id, req.body)
       res.sendOk(result)
@@ -30,7 +30,7 @@ class CategoryController {
     }
   }
 
-  async detail(req, res) {
+  async detail (req, res) {
     try {
       const result = await Services.category.getCategoryById(req.params._id)
       res.sendOk(result)
@@ -40,7 +40,7 @@ class CategoryController {
     }
   }
 
-  async list(req, res) {
+  async list (req, res) {
     try {
       // 翻页参数处理
       const offset = paramsHandler.offsetFormat(req.query, pageConfig.users)

@@ -2,7 +2,7 @@
 
 const BaseService = require('./base')
 const mdb = require('../models')
-const {resHandler} = require('../myutil')
+const { resHandler } = require('../myutil')
 
 class CategoryService extends BaseService {
   constructor (model) {
@@ -10,7 +10,7 @@ class CategoryService extends BaseService {
     this.model = 'ArticleCategory'
   }
 
-  async addCategory(data) {
+  async addCategory (data) {
     try {
       const query = {
         userId: data.userId,
@@ -24,11 +24,12 @@ class CategoryService extends BaseService {
       const result = await mdb.ArticleCategory.create(data)
       return result
     } catch (error) {
-      throw error
+      const errorMsg = 'CATEGORYNAME_ADD_FAILED'
+      throw errorMsg
     }
   }
 
-  async editById(id, params) {
+  async editById (id, params) {
     try {
       const findRes = await super.findById(id)
       if (!findRes) {
@@ -39,11 +40,12 @@ class CategoryService extends BaseService {
       const result = resHandler.getSuccessMsg('CATEGORY_UPDATE_SUCCESS')
       return result
     } catch (error) {
-      throw error
+      const errorMsg = 'CATEGORYNAME_UPDATE_FAILED'
+      throw errorMsg
     }
   }
 
-  async getCategoryById(id) {
+  async getCategoryById (id) {
     try {
       const result = await mdb.ArticleCategory.findById(id)
         .populate([{ path: 'userId', select: '-password' }])
@@ -53,16 +55,18 @@ class CategoryService extends BaseService {
       }
       return result
     } catch (error) {
-      throw error
+      const errorMsg = 'CATEGORYNAME_QUERY_FAILED'
+      throw errorMsg
     }
   }
 
-  async getCategoryList(params) {
+  async getCategoryList (params) {
     try {
       const result = await super.list(params)
       return result
     } catch (error) {
-      throw error
+      const errorMsg = 'CATEGORYNAMELIST_FIND_FAILDE'
+      throw errorMsg
     }
   }
 }

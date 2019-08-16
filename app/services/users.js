@@ -10,7 +10,7 @@ class UserService extends BaseService {
     this.model = 'User'
   }
 
-  async addUser(data) {
+  async addUser (data) {
     try {
       const findRes = await mdb.User.findOne({ name: data.name })
       if (findRes) {
@@ -21,31 +21,32 @@ class UserService extends BaseService {
       const result = await mdb.User.create(data)
       return format.user(result.toObject())
     } catch (error) {
-      throw error
+      const errorMsg = 'USER_ADD_FAILED'
+      throw errorMsg
     }
   }
 
-  async getUserByName(name) {
+  async getUserByName (name) {
     try {
       const user = await mdb.User.findOne({ name: name }, null, { lean: true })
       return user
     } catch (error) {
-      const errorMsg = 'SERVER_ERROR'
+      const errorMsg = 'USER_QUERY_FAILED'
       throw errorMsg
     }
   }
 
-  async getUserById(idParams) {
+  async getUserById (idParams) {
     try {
       const user = await mdb.User.findById(idParams)
       return user
     } catch (error) {
-      const errorMsg = 'SERVER_ERROR'
+      const errorMsg = 'USER_QUERY_FAILED'
       throw errorMsg
     }
   }
 
-  async destroy(params) {
+  async destroy (params) {
     try {
       const findRes = await mdb.User.findById(params)
       if (!findRes) {
@@ -56,11 +57,12 @@ class UserService extends BaseService {
       const result = resHandler.getSuccessMsg('USER_DELETE_SUCCESS')
       return result
     } catch (error) {
-      throw error
+      const errorMsg = 'USER_DELETE_FAILED'
+      throw errorMsg
     }
   }
 
-  async update(params) {
+  async update (params) {
     try {
       await mdb.User.findById(params._id)
       await mdb.User.update({ _id: params._id }, { $set: params })
@@ -72,16 +74,17 @@ class UserService extends BaseService {
     }
   }
 
-  async getUserList(params) {
+  async getUserList (params) {
     try {
       const result = super.list(params)
       return result
     } catch (error) {
-      throw error
+      const errorMsg = 'USERLIST_FIND_FAILDE'
+      throw errorMsg
     }
   }
 
-  async detail(params) {
+  async detail (params) {
     try {
       const findRes = await mdb.User.findById(params)
       const result = format.user(findRes.toObject())
@@ -91,8 +94,8 @@ class UserService extends BaseService {
       throw errorMsg
     }
   }
-  
-  async login(params) {
+
+  async login (params) {
     try {
       const findRes = await mdb.User.findOne({ name: params.name }, null, { lean: true })
       if (!findRes) {

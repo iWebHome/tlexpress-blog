@@ -95,6 +95,7 @@ module.exports = {
     errorCode: 20201,
     errorMsg: '该路由不存在'
   },
+  // 分类管理模块错误
   CATEGORY_HAS_EXITS: {
     status: 200,
     errorCode: 20301,
@@ -110,6 +111,32 @@ module.exports = {
     errorCode: 20303,
     errorMsg: '文章类别的名字不能为空'
   },
+  CATEGORYNAME_ADD_FAILED: {
+    status: 200,
+    errorCode: 20304,
+    errorMsg: '文章类别创建失败'
+  },
+  CATEGORYNAME_DELETE_FAILED: {
+    status: 200,
+    errorCode: 20305,
+    errorMsg: '文章类别删除失败'
+  },
+  CATEGORYNAME_UPDATE_FAILED: {
+    status: 200,
+    errorCode: 20306,
+    errorMsg: '文章类别更新失败'
+  },
+  CATEGORYNAME_QUERY_FAILED: {
+    status: 200,
+    errorCode: 20307,
+    errorMsg: '文章类别查询失败'
+  },
+  CATEGORYNAMELIST_FIND_FAILDE: {
+    status: 200,
+    errorCode: 20308,
+    errorMsg: '文章类别列表查询失败'
+  },
+  // 文档管理模块错误
   ARTICLE_HAS_EXITS: {
     status: 200,
     errorCode: 20401,
@@ -129,5 +156,30 @@ module.exports = {
     status: 200,
     errorCode: 20404,
     errorMsg: '文章内容不能为空'
+  },
+  ARTICLE_ADD_FAILED: {
+    status: 200,
+    errorCode: 20405,
+    errorMsg: '文章创建失败'
+  },
+  ARTICLE_DELETE_FAILED: {
+    status: 200,
+    errorCode: 20406,
+    errorMsg: '文章删除失败'
+  },
+  ARTICLE_UPDATE_FAILED: {
+    status: 200,
+    errorCode: 20407,
+    errorMsg: '文章更新失败'
+  },
+  ARTICLE_QUERY_FAILED: {
+    status: 200,
+    errorCode: 20408,
+    errorMsg: '文章查询失败'
+  },
+  ARTICLELIST_FIND_FAILDE: {
+    status: 200,
+    errorCode: 20409,
+    errorMsg: '文章列表查询失败'
   }
 }
