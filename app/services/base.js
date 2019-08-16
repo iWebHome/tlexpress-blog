@@ -56,9 +56,7 @@ class BaseService {
         .skip(params.skipCount)
         .limit(params.pagesize)
         .sort({ createdAt: Number(params.sortRule) })
-      // if (params.populate) {
-      //   query.populate = params.populate
-      // }
+
       const dataCount = await mdb[this.model].countDocuments()
       const list = await query
       return {
@@ -66,8 +64,6 @@ class BaseService {
         list: list
       }
     } catch (error) {
-      // const modelErrorMsg = resHandler.getModelError(this.model)
-      // throw modelErrorMsg
       throw error
     }
   }

@@ -12,6 +12,7 @@ module.exports = function (app) {
   app.use(middlewaresArr)
   require('./user')(app)
   require('./category')(app)
+  require('./article')(app)
   app.route('/test')
     .post(Controllers.test.testResponse)
 }
