@@ -13,6 +13,8 @@ module.exports = function (app) {
   require('./user')(app)
   require('./category')(app)
   require('./article')(app)
+  app.route('/upload')
+    .post(Controllers.article.upload)
   app.route('/test')
     .post(Controllers.test.testResponse)
 }

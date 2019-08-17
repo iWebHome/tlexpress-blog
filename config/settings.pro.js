@@ -10,7 +10,7 @@ module.exports = {
   // mongodb数据库配置
   dbConfig: {
     URL: 'mongodb://127.0.0.1:27017/tlexpress-blog',
-    DB: 'express-blog',
+    DB: 'tlexpress-blog',
     HOST: '127.0.0.1',
     PORT: 27017,
     USERNAME: 'lichuanjun',
@@ -21,5 +21,15 @@ module.exports = {
     name: 'admin',
     password: '123456',
     role: 'ordinary users'
+  },
+  qiniuConfig: {
+    accessKey: 'tE8LKUlC7lijigI7xlUPdsVEweCr01R10xyWXPGG',
+    secretKey: 'Z9JId_A7hQ-8RPMLwLyCaQyctPogJzTrJNO4Tw1Z',
+    bucket: 'leechuanjun',
+    originUrl: 'qiniucdn.com'
+  },
+  upload: {
+    savePath: 'app/public/upload',
+    showPath: '/upload/'
   }
 }

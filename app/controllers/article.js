@@ -1,9 +1,9 @@
 'use strict'
-// const uuidv1 = require('uuid/v1')
-// const path = require('path')
+const uuidv1 = require('uuid/v1')
+const path = require('path')
 const Services = require('../services')
-const { auth, resHandler, paramsHandler, validator } = require('../myutil')//, upload
-const { pageConfig } = require('../../config')//, settings
+const { auth, resHandler, paramsHandler, validator, upload } = require('../myutil')//, upload
+const { pageConfig, settings } = require('../../config')//, settings
 
 class ArticleController {
   async create (req, res) {
@@ -35,50 +35,50 @@ class ArticleController {
     }
   }
 
-  // async upload(req, res) {
-  //   try {
-  //     const fileInfo = await upload.getFileInfo(req)
-  //     let tasks = []
-  //     let result
-  //     if (!settings.qiniuConfig.accessKey) {
-  //       let saveRes = []
-  //       for (let item in fileInfo.files) {
-  //         const uid = uuidv1()
-  //         const filePath = fileInfo.files[item].path
-  //         const fileName = uid + path.extname(fileInfo.files[item].name).toLowerCase()
-  //         const target = path.join(settings.upload.savePath, fileName)
-  //         saveRes.push(await Services.article.saveFile(filePath, target, fileName))
-  //       }
-  //       result = saveRes.map(item => {
-  //         let obj = {
-  //           imageUrl: `${settings.website}${settings.upload.showPath}${item}`,
-  //           imageName: item,
-  //           resource: 'server'
-  //         }
-  //         return obj
-  //       })
-  //     } else {
-  //       for (let item in fileInfo.files) {
-  //         const uid = uuidv1()
-  //         const filePath = fileInfo.files[item].path
-  //         const fileName = uid + path.extname(fileInfo.files[item].name).toLowerCase()
-  //         tasks.push(Services.article.qiniuUpload(filePath, fileName))
-  //       }
-  //       const qiniuRes = await Promise.all(tasks)
-  //       result = qiniuRes.map(item => {
-  //         let obj = {
-  //           imageUrl: `${settings.qiniuConfig.originUrl}${item.key}`,
-  //           imageName: item.key,
-  //           resource: 'qiniu'
-  //         }
-  //         return obj
-  //       })
-  //     }
-  //     res.sendOk(result)
-  //   } catch (error) {
-  //     res.sendErr(error)
-  //   }
-  // }
+  async upload(req, res) {
+    try {
+      const fileInfo = await upload.getFileInfo(req)
+      let tasks = []
+      let result
+      if (!settings.qiniuConfig.accessKey) {
+        let saveRes = []
+        for (let item in fileInfo.files) {
+          const uid = uuidv1()
+          const filePath = fileInfo.files[item].path
+          const fileName = uid + path.extname(fileInfo.files[item].name).toLowerCase()
+          const target = path.join(settings.upload.savePath, fileName)
+          saveRes.push(await Services.article.saveFile(filePath, target, fileName))
+        }
+        result = saveRes.map(item => {
+          let obj = {
+            imageUrl: `${settings.website}${settings.upload.showPath}${item}`,
+            imageName: item,
+            resource: 'server'
+          }
+          return obj
+        })
+      } else {
+        for (let item in fileInfo.files) {
+          const uid = uuidv1()
+          const filePath = fileInfo.files[item].path
+          const fileName = uid + path.extname(fileInfo.files[item].name).toLowerCase()
+          tasks.push(Services.article.qiniuUpload(filePath, fileName))
+        }
+        const qiniuRes = await Promise.all(tasks)
+        result = qiniuRes.map(item => {
+          let obj = {
+            imageUrl: `${settings.qiniuConfig.originUrl}${item.key}`,
+            imageName: item.key,
+            resource: 'qiniu'
+          }
+          return obj
+        })
+      }
+      res.sendOk(result)
+    } catch (error) {
+      res.sendErr(error)
+    }
+  }
 
   async detail (req, res) {
     try {

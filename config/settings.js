@@ -21,5 +21,15 @@ module.exports = {
     name: 'admin',
     password: '123456',
     role: 'ordinary users'
+  },
+  qiniuConfig: {
+    accessKey: 'tE8LKUlC7lijigI7xlUPdsVEweCr01R10xyWXPGG',
+    secretKey: 'Z9JId_A7hQ-8RPMLwLyCaQyctPogJzTrJNO4Tw1Z',
+    bucket: 'leechuanjun',
+    originUrl: 'pwd2cwxph.bkt.clouddn.com+licj'
+  },
+  upload: {
+    savePath: 'app/public/upload',
+    showPath: '/upload/'
   }
 }

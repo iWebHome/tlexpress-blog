@@ -181,5 +181,10 @@ module.exports = {
     status: 200,
     errorCode: 20409,
     errorMsg: '文章列表查询失败'
+  },
+  ARTICLE_UPLOAD_FAILED: {
+    status: 200,
+    errorCode: 20410,
+    errorMsg: '文章上传失败'
   }
 }
