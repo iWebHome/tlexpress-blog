@@ -3,14 +3,14 @@
 const mdbs = require('../app/models')
 const myutil = require('../app/myutil')
 
-module.exports = async (name, password, saltKey, role) => {
+module.exports = async (name, password, aseKey, aseIv, role) => {
   try {
     const findRes = await mdbs.User.findOne({ name: name })
     if (findRes) {
       console.log('admin用户已经存在，请勿重复添加')
       return 'admin用户已经存在，请勿重复添加'
     } else {
-      const newPwd = myutil.crypto.encrypted(password, saltKey)
+      const newPwd = myutil.crypto.encrypted(password, aseKey, aseIv)
       mdbs.User.create({
         name: name,
         nickname: name,

@@ -17,7 +17,7 @@ class UserService extends BaseService {
         const errorMsg = 'USER_HAS_EXITS'
         throw errorMsg
       }
-      data.password = crypto.encrypted(data.password, settings.saltKey)
+      data.password = crypto.encrypted(data.password, settings.aseKey, settings.aseIv)
       const result = await mdb.User.create(data)
       return format.user(result.toObject())
     } catch (error) {
@@ -102,7 +102,7 @@ class UserService extends BaseService {
         const errorMsg = 'USER_NOT_EXITS'
         throw errorMsg
       }
-      const inputPasswd = crypto.encrypted(params.password, settings.saltKey)
+      const inputPasswd = crypto.encrypted(params.password, settings.aseKey, settings.aseIv)
       const equal = await crypto.checkPasswd(inputPasswd, findRes.password)
       if (!equal) {
         const errorMsg = 'USER_PASSWORD_WRONG'

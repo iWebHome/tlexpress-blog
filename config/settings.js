@@ -3,6 +3,9 @@
 module.exports = {
   // 密码盐
   saltKey: 'tlexpress_frame',
+  // ase-128-cbc 加密算法要求key和iv长度都为16
+  aseKey: 'tlexpress_asekey',
+  aseIv: 'tlexpress_ase_iv',
   // jwt实现token认证的secret
   jwtSecret: 'tlexpress_jwt',
   port: process.env.PORT || 4000,

@@ -21,6 +21,6 @@ app.use(bodyParser.json())
 app.listen(settings.port)
 console.log('tlexpress-blog server started on: ' + settings.port)
 
-inits.createAdmin(settings.adminConfig.name, settings.adminConfig.password, settings.saltKey, settings.adminConfig.role)
+inits.createAdmin(settings.adminConfig.name, settings.adminConfig.password, settings.aseKey, settings.aseIv, settings.adminConfig.role)
 
 module.exports = app

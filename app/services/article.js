@@ -72,7 +72,7 @@ class ArticleService extends BaseService {
     }
   }
 
-  async qiniuUpload(localFile, key) {
+  async qiniuUpload (localFile, key) {
     try {
       const { accessKey, secretKey, bucket } = settings.qiniuConfig
       const mac = new qiniu.auth.digest.Mac(accessKey, secretKey)

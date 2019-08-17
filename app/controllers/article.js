@@ -2,8 +2,8 @@
 const uuidv1 = require('uuid/v1')
 const path = require('path')
 const Services = require('../services')
-const { auth, resHandler, paramsHandler, validator, upload } = require('../myutil')//, upload
-const { pageConfig, settings } = require('../../config')//, settings
+const { auth, resHandler, paramsHandler, validator, upload } = require('../myutil')
+const { pageConfig, settings } = require('../../config')
 
 class ArticleController {
   async create (req, res) {
@@ -35,14 +35,14 @@ class ArticleController {
     }
   }
 
-  async upload(req, res) {
+  async upload (req, res) {
     try {
       const fileInfo = await upload.getFileInfo(req)
-      let tasks = []
+      const tasks = []
       let result
       if (!settings.qiniuConfig.accessKey) {
-        let saveRes = []
-        for (let item in fileInfo.files) {
+        const saveRes = []
+        for (const item in fileInfo.files) {
           const uid = uuidv1()
           const filePath = fileInfo.files[item].path
           const fileName = uid + path.extname(fileInfo.files[item].name).toLowerCase()
@@ -50,7 +50,7 @@ class ArticleController {
           saveRes.push(await Services.article.saveFile(filePath, target, fileName))
         }
         result = saveRes.map(item => {
-          let obj = {
+          const obj = {
             imageUrl: `${settings.website}${settings.upload.showPath}${item}`,
             imageName: item,
             resource: 'server'
@@ -58,7 +58,7 @@ class ArticleController {
           return obj
         })
       } else {
-        for (let item in fileInfo.files) {
+        for (const item in fileInfo.files) {
           const uid = uuidv1()
           const filePath = fileInfo.files[item].path
           const fileName = uid + path.extname(fileInfo.files[item].name).toLowerCase()
@@ -66,7 +66,7 @@ class ArticleController {
         }
         const qiniuRes = await Promise.all(tasks)
         result = qiniuRes.map(item => {
-          let obj = {
+          const obj = {
             imageUrl: `${settings.qiniuConfig.originUrl}${item.key}`,
             imageName: item.key,
             resource: 'qiniu'
